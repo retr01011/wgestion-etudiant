@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Providers;
-
+use App\Events\UserLoggedIn;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Support\Facades\Event;
 use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
@@ -41,6 +43,10 @@ class FortifyServiceProvider extends ServiceProvider
 
         RateLimiter::for('two-factor', function (Request $request) {
             return Limit::perMinute(5)->by($request->session()->get('login.id'));
+        });
+
+        Event::listen(Login::class, function ($event) {
+            event(new UserLoggedIn($event->user));
         });
     }
 }

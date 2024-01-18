@@ -115,4 +115,11 @@ class FiliereController extends Controller
         return redirect()->route('filieres.index')->with('success', 'Filière supprimée avec succès');
     
     }
+
+    public function filiereWithEtudiantCount()
+    {
+        $filieresWithCount = Filiere::withCount('etudiants')->get();
+        
+        return view('filieres.filieres_with_etudiant_count', compact('filieresWithCount'));
+    }
 }

@@ -15,11 +15,15 @@
                 <!-- Navigation Links -->
                  <!-- Add Filières and Étudiants Links -->
                  <x-nav-link href="{{ route('filieres.index') }}" :active="request()->routeIs('filieres.*')">
-                        {{ __('Filières') }}
+                        {{ __('CRUD Filières') }}
                     </x-nav-link>
 
                     <x-nav-link href="{{ route('etudiants.index') }}" :active="request()->routeIs('etudiants.*')">
-                        {{ __('Étudiants') }}
+                        {{ __('CRUD Étudiants') }}
+                    </x-nav-link>
+
+                    <x-nav-link href="{{ route('filieres.with.etudiant.count') }}" :active="request()->routeIs('filieres.with.etudiant.count')">
+                        {{ __('Filières with Étudiant Count') }}
                     </x-nav-link>
 
             </div>
@@ -155,6 +159,10 @@
             <x-responsive-nav-link href="{{ route('etudiants.index') }}" :active="request()->routeIs('etudiants.*')">
                 {{ __('Étudiants') }}
             </x-responsive-nav-link>
+
+            <x-responsive-nav-link href="{{ route('filieres.with.etudiant.count') }}" :active="request()->routeIs('filieres.with.etudiant.count')">
+            {{ __('Filières with Étudiant Count') }}
+        </x-responsive-nav-link>
         </div>
 
         <!-- Responsive Settings Options -->

@@ -20,8 +20,14 @@ Route::get('/', function () {
     return redirect()->route('dashboard');
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/filieres', [FiliereController::class, 'index'])->name('filieres.index');
+Route::group(['middleware' => ['auth', 'checkUserRole']], function () {
+
+    Route::resource('filieres', FiliereController::class);
+    Route::resource('etudiants', EtudiantController::class);
+
+    Route::get('/filieres-with-etudiant-count', [FiliereController::class, 'filiereWithEtudiantCount'])->name('filieres.with.etudiant.count');
+
+/*     Route::get('/filieres', [FiliereController::class, 'index'])->name('filieres.index');
     Route::get('/filieres/create', [FiliereController::class, 'create'])->name('filieres.create');
     Route::post('/filieres', [FiliereController::class, 'store'])->name('filieres.store');
     Route::get('/filieres/{id}', [FiliereController::class, 'show'])->name('filieres.show');
@@ -35,7 +41,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/etudiants/{id}', [EtudiantController::class, 'show'])->name('etudiants.show');
     Route::get('/etudiants/{id}/edit', [EtudiantController::class, 'edit'])->name('etudiants.edit');
     Route::put('/etudiants/{id}', [EtudiantController::class, 'update'])->name('etudiants.update');
-    Route::delete('/etudiants/{id}', [EtudiantController::class, 'destroy'])->name('etudiants.destroy');
+    Route::delete('/etudiants/{id}', [EtudiantController::class, 'destroy'])->name('etudiants.destroy'); */
 
 });
 
